@@ -50,6 +50,6 @@ setup(
     packages=find_packages(exclude=['tests']),
 
     extras_require={
-        'test': ['pytest'],
+        'test': ['pytest>=3.0.0'],
     },
 )
