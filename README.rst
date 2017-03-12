@@ -1,5 +1,8 @@
-cxxfilt
-=======
+cxxfilt |travis|
+================
+
+.. |travis| image:: https://travis-ci.org/afg984/python-cxxfilt.svg?branch=master
+    :target: https://travis-ci.org/afg984/python-cxxfilt
 
 Demangling C++ symbols in Python / interface to abi::__cxa_demangle
 
