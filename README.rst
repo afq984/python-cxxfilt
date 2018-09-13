@@ -24,6 +24,13 @@ Non-mangled name will be kept intact::
     >>> cxxfilt.demangle('main')
     'main'
 
+To demangle an internal symbol, use `external_only=False`::
+
+    >>> cxxfilt.demangle('N3foo12BarExceptionE')
+    'N3foo12BarExceptionE'
+    >>> cxxfilt.demangle('N3foo12BarExceptionE', external_only=False)
+    'foo::BarException'
+
 Invalid mangled names will trigger an ``InvalidName`` exception::
 
     >>> cxxfilt.demangle('_ZQQ')
