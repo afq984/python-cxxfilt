@@ -43,9 +43,9 @@ libcxx = ctypes.CDLL(find_any_library('c++', 'stdc++'))
 libcxx.__cxa_demangle.restype = CharP
 
 
-def demangleb(mangled_name):
-    # Wikipedia: All mangled symbols begin with _Z
-    if not mangled_name.startswith(b'_Z'):
+def demangleb(mangled_name, external_only=True):
+    # Wikipedia: All *external* mangled symbols begin with _Z
+    if external_only and not mangled_name.startswith(b'_Z'):
         return mangled_name
 
     mangled_name_p = ctypes.c_char_p(mangled_name)
@@ -73,5 +73,6 @@ def demangleb(mangled_name):
         raise InternalError('Unkwon status code: {}'.format(status.value))
 
 
-def demangle(mangled_name):
-    return demangleb(mangled_name.encode()).decode()
+def demangle(mangled_name, external_only=True):
+    return demangleb(
+        mangled_name.encode(), external_only=external_only).decode()
