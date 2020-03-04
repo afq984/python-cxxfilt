@@ -20,7 +20,7 @@ setup(
     description='Python interface to c++filt / abi::__cxa_demangle',
     long_description=long_description,
 
-    url='https://github.com/afg984/python-cxxfilt',
+    url='https://github.com/afq984/python-cxxfilt',
 
     author='afg984',
     author_email='afg984@gmail.com',
