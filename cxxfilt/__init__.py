@@ -39,7 +39,7 @@ def find_any_library(*choices):
 libc = ctypes.CDLL(find_any_library('c'))
 libc.free.argtypes = [ctypes.c_void_p]
 
-libcxx = ctypes.CDLL(find_any_library('c++', 'stdc++'))
+libcxx = ctypes.CDLL(find_any_library('stdc++', 'c++'))
 libcxx.__cxa_demangle.restype = CharP
 
 
