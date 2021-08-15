@@ -1,8 +1,8 @@
-cxxfilt |travis|
-================
+cxxfilt |ci|
+============
 
-.. |travis| image:: https://travis-ci.org/afq984/python-cxxfilt.svg?branch=master
-    :target: https://travis-ci.org/afq984/python-cxxfilt
+.. |ci| image:: https://github.com/afq984/python-cxxfilt/actions/workflows/test.yml/badge.svg
+    :target: https://github.com/afq984/python-cxxfilt/actions/workflows/test.yml
 
 Demangling C++ symbols in Python / interface to abi::__cxa_demangle
 
@@ -47,15 +47,43 @@ Use ``demangleb`` to demangle name in ``bytes``::
     >>> cxxfilt.demangleb(b'_ZNSt22condition_variable_anyD2Ev')
     b'std::condition_variable_any::~condition_variable_any()'
 
+Make custom `Demangler` objects to use specific C/C++ libraries::
+
+    >>> from ctypes.util import find_library
+    >>>
+    >>> d = cxxfilt.Demangler(find_library('c'), find_library('stdc++'))
+    >>> d
+    <Demangler libc='libc.so.6' libcxx='libstdc++.so.6'>
+    >>>
+    >>> d = cxxfilt.Demangler(find_library('c'), find_library('c++'))
+    >>> d
+    <Demangler libc='libc.so.6' libcxx='libc++.so.1'>
+    >>> d.demangle('_ZNSt22condition_variable_anyD2Ev')
+    'std::condition_variable_any::~condition_variable_any()'
 
 Supported environments
 ----------------------
 
-Python 2.7 / 3.3+
+Python 3.6 or greater.
 
-Tested on Arch Linux and FreeBSD. Should work on unix systems with libc and libc++/libstdc++
+Tested on Linux and macOS (see github actions). Should work on unix systems with libc and libc++/libstdc++.
 
-Will not work on Windows.
+Will not work on Windows (PR welcome though).
+
+For Python 2.7 please use cxxfilt version < 0.3.
+
+Changelog
+---------
+
+0.3.0
+~~~~~
+
+*   Added ``Demangler`` class.
+
+*   ``import cxxfilt`` no longer fails when there are no C/C++ libraries available.
+    To check whether the default demangler is valid,
+    use the expression: ``not isinstance(cxxfilt.default_demangler, cxxfilt.DeferedErrorDemangler)``.
+
 
 Testing
 -------

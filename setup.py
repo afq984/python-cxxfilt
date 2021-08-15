@@ -9,6 +9,8 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+# reads __version__
+__version__: str
 with open(path.join(here, 'cxxfilt', 'version.py'), encoding='utf-8') as f:
     exec(f.read())
 
@@ -22,7 +24,7 @@ setup(
 
     url='https://github.com/afq984/python-cxxfilt',
 
-    author='afg984',
+    author='afq984',
     author_email='afg984@gmail.com',
 
     license='BSD',
@@ -36,15 +38,12 @@ setup(
 
         'License :: OSI Approved :: BSD License',
 
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
     ],
 
     keywords='c++ c++filt name mangling',
