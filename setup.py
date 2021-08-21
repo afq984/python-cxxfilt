@@ -21,6 +21,7 @@ setup(
 
     description='Python interface to c++filt / abi::__cxa_demangle',
     long_description=long_description,
+    long_description_content_type='text/x-rst',
 
     url='https://github.com/afq984/python-cxxfilt',
 
