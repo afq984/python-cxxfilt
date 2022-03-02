@@ -20,8 +20,7 @@ class InternalError(Error):
 
 
 class InvalidName(Error):
-    '''Exception raised when:
-    mangled_name is not a valid name under the C++ ABI mangling rules.'''
+    '''When mangled name is not a valid name under the C++ ABI mangling rules.'''
 
     def __init__(self, mangled_name: Union[str, bytes]) -> None:
         super(InvalidName, self).__init__()
@@ -90,13 +89,13 @@ class Demangler(BaseDemangler):
         if status.value == 0:
             return demangled
         elif status.value == -1:
-            raise InternalError('A memory allocation failiure occurred')
+            raise InternalError('A memory allocation failure occurred')
         elif status.value == -2:
             raise InvalidName(mangled_name)
         elif status.value == -3:
             raise InternalError('One of the arguments is invalid')
         else:
-            raise InternalError('Unkwon status code: {}'.format(status.value))
+            raise InternalError('Unknown status code: {}'.format(status.value))
 
 
 class DeferedErrorDemangler(BaseDemangler):
