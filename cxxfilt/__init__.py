@@ -106,8 +106,8 @@ class BaseDemangler(abc.ABC):
 
         Raises:
             InternalError: When the libcxx library call fails internally.
-            InvalidNameError: When `mangled_name` is an invalid name.
-            LibraryNotFoundError: When the libc or libcxx library aren't found.
+            InvalidName: When `mangled_name` is an invalid name.
+            LibraryNotFound: When the libc or libcxx library aren't found.
         '''
 
         raise NotImplementedError
@@ -142,8 +142,8 @@ class BaseDemangler(abc.ABC):
 
         Raises:
             InternalError: When the libcxx library call fails internally.
-            InvalidNameError: When `mangled_name` is an invalid name.
-            LibraryNotFoundError: When the libc or libcxx library aren't found.
+            InvalidName: When `mangled_name` is an invalid name.
+            LibraryNotFound: When the libc or libcxx library aren't found.
         '''
         
         return self.demangleb(mangled_name.encode(), external_only).decode()
@@ -271,8 +271,8 @@ def demangle(mangled_name: str, external_only: bool = True) -> str:
 
     Raises:
         InternalError: When the libcxx library call fails internally.
-        InvalidNameError: When `mangled_name` is an invalid name.
-        LibraryNotFoundError: When the libc or libcxx library aren't found.
+        InvalidName: When `mangled_name` is an invalid name.
+        LibraryNotFound: When the libc or libcxx library aren't found.
     '''
 
     return default_demangler.demangle(mangled_name, external_only)
@@ -308,8 +308,8 @@ def demangleb(mangled_name: bytes, external_only: bool = True) -> bytes:
 
     Raises:
         InternalError: When the libcxx library call fails internally.
-        InvalidNameError: When `mangled_name` is an invalid name.
-        LibraryNotFoundError: When the libc or libcxx library aren't found.
+        InvalidName: When `mangled_name` is an invalid name.
+        LibraryNotFound: When the libc or libcxx library aren't found.
     '''
 
     return default_demangler.demangleb(mangled_name, external_only)
