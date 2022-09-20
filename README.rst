@@ -1,6 +1,8 @@
 cxxfilt |ci|
 ============
 
+test only
+
 .. |ci| image:: https://github.com/afq984/python-cxxfilt/actions/workflows/test.yml/badge.svg
     :target: https://github.com/afq984/python-cxxfilt/actions/workflows/test.yml
 
