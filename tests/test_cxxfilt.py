@@ -24,6 +24,12 @@ def test_reject_invalid_nameb():
 
 
 def test_demangle():
+    if not cxxfilt.default_demangler.is_demangling_through_cxa():
+        assert cxxfilt.demangle('??1_Sentry_base@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAE@XZ', False) in {
+            'std::basic_ostream<char,struct std::char_traits<char> >::_Sentry_base::~_Sentry_base(void)'
+        }
+        return
+
     assert cxxfilt.demangle('_ZNSt22condition_variable_anyD2Ev') in {
         'std::condition_variable_any::~condition_variable_any()',
         'std::condition_variable_any::~condition_variable_any(void)',
@@ -31,6 +37,12 @@ def test_demangle():
 
 
 def test_demangleb():
+    if not cxxfilt.default_demangler.is_demangling_through_cxa():
+        assert cxxfilt.demangleb(b'??1_Sentry_base@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAE@XZ', False) in {
+            b'std::basic_ostream<char,struct std::char_traits<char> >::_Sentry_base::~_Sentry_base(void)'
+        }
+        return
+
     assert cxxfilt.demangleb(b'_ZNSt22condition_variable_anyD2Ev') in {
         b'std::condition_variable_any::~condition_variable_any()',
         b'std::condition_variable_any::~condition_variable_any(void)',
@@ -54,12 +66,9 @@ def test_demangleb():
     ],
 )
 def test_demangle_parametrize(input, external_only, valid_outputs):
+    if not cxxfilt.default_demangler.is_demangling_through_cxa():
+        return  # fixme: write tests for dbghelp demangler
     assert cxxfilt.demangle(input, external_only=external_only) in valid_outputs
-
-
-def test_find_any_library():
-    with pytest.raises(cxxfilt.LibraryNotFound):
-        cxxfilt.find_any_library()
 
 
 def test_default_demangler():
